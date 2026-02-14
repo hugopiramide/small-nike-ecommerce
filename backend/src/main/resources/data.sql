@@ -1,3 +1,17 @@
+-- =============================================================================
+-- LIMPIEZA DE TABLAS (Evita duplicados y errores de FK)
+-- =============================================================================
+SET FOREIGN_KEY_CHECKS = 0; -- Deshabilita restricciones para permitir el truncado
+
+TRUNCATE TABLE cart_item;
+TRUNCATE TABLE cart;
+TRUNCATE TABLE product_variant;
+TRUNCATE TABLE product;
+TRUNCATE TABLE category;
+TRUNCATE TABLE user;
+
+SET FOREIGN_KEY_CHECKS = 1; -- Vuelve a habilitar las restricciones
+
 ALTER TABLE product CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ALTER TABLE category CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
