@@ -1,0 +1,62 @@
+/* Quitamos el borde por defecto de Bootstrap para un look más limpio */
+.nike-card {
+    border: none !important;
+    background-color: transparent !important; /* El fondo lo dará el contenedor padre o la imagen */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    /* Aseguramos que use Poppins */
+    font-family: 'Poppins', sans-serif; 
+}
+
+p{
+    
+    text-decoration: none;
+}
+
+/* Un efecto muy sutil al pasar el mouse */
+.nike-card:hover {
+    transform: translateY(-5px);
+}
+
+/* EL SECRETO DE NIKE: El contenedor de la imagen */
+.nike-card-img-container {
+    background-color: #f5f5f5; /* Este es el gris clásico de Nike */
+    position: relative;
+    width: 100%;
+    /* Truco para mantener una relación de aspecto cuadrada (1:1) o 4:3 */
+    /* Si tus imágenes no son cuadradas, ajusta esto (ej. 75% para 4:3) */
+    overflow: hidden;
+    border-radius: 8px; /* Bordes ligeramente redondeados solo en la imagen */
+}
+
+/* La imagen en sí */
+.nike-card-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 20%;
+    /* 'cover' recorta la imagen para llenar el cuadro, 'contain' la muestra entera sin recortar */
+    object-fit: contain; 
+    padding: 10px; /* Un pequeño respiro para que el producto no toque los bordes */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Tipografía */
+.nike-card-title {
+    font-weight: 600; /* Semi-bold */
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+    line-height: 1.2;
+}
+
+.nike-card-category {
+    font-size: 0.95rem;
+    color: #757575 !important; /* Un gris medio para el subtítulo */
+}
+
+.nike-card-price {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+}
