@@ -2,6 +2,7 @@ import { Link, type LoaderFunction, useLoaderData } from "react-router-dom"
 import { useState } from 'react'
 import { type ProductResponse } from "../types/types"
 import { CartService } from '../services/ShoppingCartService'
+import { isUserLoggedIn } from '../utils/authUtils'
 
 const loader: LoaderFunction = async ({ params }) => {
   const response = await fetch(`http://localhost:8080/api/products/${params.articleId}`)
@@ -82,7 +83,7 @@ const ArticleDetails = () => {
             </div>
 
             <div className="d-grid gap-2 pt-2">
-              {localStorage.getItem('userId') ? (
+              {isUserLoggedIn() ? (
                 <form onSubmit={async (e) => {
                   e.preventDefault()
                   if (!selectedVariantId) {

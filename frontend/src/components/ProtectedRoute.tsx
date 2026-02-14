@@ -1,10 +1,11 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
+import { isUserLoggedIn } from '../utils/authUtils'
 
 const ProtectedRoute = () => {
-    const user = localStorage.getItem('userId')
+    const isLoggedIn = isUserLoggedIn()
     const location = useLocation()
 
-    if (!user) {
+    if (!isLoggedIn) {
         return <Navigate to="/login" state={{ from: location }} replace />
     }
 
