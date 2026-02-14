@@ -85,16 +85,19 @@ const Navbar = () => {
 
             <ul className="navbar-nav mx-auto gap-1 gap-lg-4 text-uppercase fw-bold small tracking-wider">
               <li className="nav-item">
-                <Link className="nav-link px-0 text-dark" to="/articles" onClick={() => setIsOpen(false)}>Todos</Link>
+                <Link className="nav-link px-0 text-dark" to="/" onClick={() => setIsOpen(false)}>Inicio</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-0 text-dark" href="#" onClick={() => setIsOpen(false)}>Hombre</a>
+                <Link className="nav-link px-0 text-dark" to="/articles" onClick={() => setIsOpen(false)}>Artículos</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-0 text-dark" href="#" onClick={() => setIsOpen(false)}>Mujer</a>
+                <a className="nav-link px-0 text-dark" href="#" onClick={(e) => e.preventDefault()}>Novedades</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link px-0 text-dark" href="#" onClick={() => setIsOpen(false)}>Sneakers</a>
+                <a className="nav-link px-0 text-dark" href="#" onClick={(e) => e.preventDefault()}>Ofertas</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link px-0 text-dark" href="#" onClick={(e) => e.preventDefault()}>Sneakers</a>
               </li>
             </ul>
           </div>
