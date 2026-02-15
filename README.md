@@ -22,7 +22,7 @@ docker-compose --version
 ### 1. Clonar el Repositorio
 
 ```bash
-git clone <url-del-repositorio>
+git clone https://github.com/hugopiramide/small-nike-ecommerce.git
 cd small-nike-ecommerce
 ```
 
@@ -193,3 +193,4 @@ docker-compose down --rmi all -v
 # Iniciar de nuevo
 docker-compose up -d --build
 ```
+
