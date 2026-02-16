@@ -82,7 +82,7 @@ export interface UserRequest {
   username: string;
   name: string;
   surnames: string;
-  birthday: Date;
+  birthday: Date | string;
   email: string;
   password: string;
   profileImgUrl: string;

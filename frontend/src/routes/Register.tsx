@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { authService } from '../services/AuthService' 
-import { type UserRequest, type LoginRequest } from '../types/types' 
+import { authService } from '../services/AuthService'
+import { type UserRequest, type LoginRequest } from '../types/types'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -10,12 +10,12 @@ const Register = () => {
     username: '',
     password: '',
   })
-  
+
   const [formData, setFormData] = useState<UserRequest>({
     username: '',
     name: '',
     surnames: '',
-    birthday: new Date(),
+    birthday: '',
     email: '',
     password: '',
     profileImgUrl: ''
@@ -25,30 +25,26 @@ const Register = () => {
   const [loading, setLoading] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    
-    if (name === 'birthday') {
-      setFormData(prev => ({
-        ...prev,
-        [name]: new Date(value)
-      }))
-    } else {
-      setFormData(prev => ({
-        ...prev,
-        [name]: value
-      }))
-    }
+    const { name, value } = e.target
+    setFormData((prev: UserRequest) => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
-  const isAdult = (birthDate: Date): boolean => {
+  const isAdult = (birthDateString: string | Date): boolean => {
+    if (!birthDateString) return false
+    const birthDate = new Date(birthDateString)
+    if (isNaN(birthDate.getTime())) return false
+
     const today = new Date()
     const age = today.getFullYear() - birthDate.getFullYear()
     const monthDiff = today.getMonth() - birthDate.getMonth()
-    
+
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
       return age - 1 >= 18
     }
-    
+
     return age >= 18
   }
 
@@ -64,7 +60,11 @@ const Register = () => {
     }
 
     try {
-      const newUser = await authService.register(formData)
+      const submissionData: UserRequest = {
+        ...formData,
+        birthday: new Date(formData.birthday)
+      }
+      const newUser = await authService.register(submissionData)
 
       setCredentials({
         username: formData.username,
@@ -86,8 +86,8 @@ const Register = () => {
   return (
     <div className="container min-h-screen bg-white flex flex-col items-center px-4 pt-10 font-sans text-[#111111] text-center">
       <div className="mt-5">
-        <Link className="navbar-brand" to="/"> 
-          <img id="logo" src="/src/assets/img/logo.svg" alt="Logo" className="w-16" /> 
+        <Link className="navbar-brand" to="/">
+          <img id="logo" src="/src/assets/img/logo.svg" alt="Logo" className="w-16" />
         </Link>
       </div>
 
@@ -101,14 +101,14 @@ const Register = () => {
         <form className="flex flex-col gap-4 text-center" onSubmit={handleSubmit}>
           <input
             type="text"
-            name="username" 
+            name="username"
             value={formData.username}
             onChange={handleChange}
             placeholder="UserName"
             className="w-full border border-gray-300 p-3 rounded-sm focus:border-black outline-none transition-all"
             required
           />
-          
+
           <input
             type="text"
             name="name"
@@ -132,13 +132,13 @@ const Register = () => {
           <input
             type="date"
             name="birthday"
-            value={formData.birthday instanceof Date ? formData.birthday.toISOString().split('T')[0] : ''}
+            value={formData.birthday}
             onChange={handleChange}
             placeholder="Fecha de Nacimiento"
             className="w-full border border-gray-300 p-3 rounded-sm focus:border-black outline-none transition-all"
             required
           />
-          
+
           <input
             type="email"
             name="email"
@@ -148,7 +148,7 @@ const Register = () => {
             className="w-full border border-gray-300 p-3 rounded-sm focus:border-black outline-none transition-all"
             required
           />
-          
+
           <input
             type="password"
             name="password"
@@ -170,10 +170,10 @@ const Register = () => {
 
           <p className="text-[12px] text-gray-500 text-center leading-5 px-4 mt-3">
             Registrándote aceptas la
-            <span className="underline text-black font-semibold"> HCD Política de Privacidad y Términos de Uso</span> 
+            <span className="underline text-black font-semibold"> HCD Política de Privacidad y Términos de Uso</span>
           </p>
 
-          <button 
+          <button
             type="submit"
             disabled={loading}
             className={`bg-black text-white font-bold py-3 mt-4 rounded-sm hover:bg-zinc-800 transition-colors uppercase tracking-tight p-5 ${loading ? 'opacity-50' : ''}`}
@@ -184,7 +184,7 @@ const Register = () => {
 
         <div className="mt-6 text-center text-sm">
           <span className="text-gray-500 me-3">¿Ya eres miembro?</span>
-          <Link 
+          <Link
             to={'/login'}
             className="ml-1 font-bold underline hover:text-gray-600 transition-colors"
           >
@@ -193,8 +193,8 @@ const Register = () => {
         </div>
 
         <div className="mt-6 text-center">
-          <Link 
-            to={'/'} 
+          <Link
+            to={'/'}
             className="no-underline text-gray-400 hover:text-black text-xs transition-colors"
           >
             ← Volver al Inicio
