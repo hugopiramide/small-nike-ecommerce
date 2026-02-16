@@ -48,6 +48,21 @@ const Register = () => {
     setError(null)
     setLoading(true)
 
+    // Estandard validation for missing fields
+    if (!formData.username || !formData.name || !formData.surnames || !formData.email || !formData.password || !formData.birthday) {
+      setError('Por favor, rellena todos los campos obligatorios')
+      setLoading(false)
+      return
+    }
+
+    // Date validation
+    const birthDate = new Date(formData.birthday)
+    if (isNaN(birthDate.getTime())) {
+      setError('La fecha de nacimiento no es válida')
+      setLoading(false)
+      return
+    }
+
     if (!isAdult(formData.birthday)) {
       setError('Debes ser mayor de 18 años para registrarte')
       setLoading(false)
