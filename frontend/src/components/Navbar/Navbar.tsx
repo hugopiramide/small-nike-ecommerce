@@ -6,7 +6,7 @@ import { useEffect, useState, useCallback } from 'react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const userData = localStorage.getItem('username')
+  const userData = localStorage.getItem('user')
   const user = userData ? JSON.parse(userData) : null
 
   const [cartCount, setCartCount] = useState<number>(0)
@@ -21,7 +21,6 @@ const Navbar = () => {
         setCartCount(countNum)
       }
     } catch (error) {
-      console.error("Error cargando carrito:", error)
     }
   }, [user?.id])
 

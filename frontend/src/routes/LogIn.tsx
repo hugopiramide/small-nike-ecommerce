@@ -16,7 +16,7 @@ const LogIn = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setCredentials((prev) => ({
+    setCredentials((prev: LoginRequest) => ({
       ...prev,
       [name]: value,
     }))
@@ -30,7 +30,7 @@ const LogIn = () => {
     try {
       const user = await authService.login(credentials)
 
-      localStorage.setItem('username', JSON.stringify(user))
+      localStorage.setItem('user', JSON.stringify(user))
 
       navigate('/home', { state: { message: '¡Bienvenido de nuevo, ' + user.username + '!' } })
     } catch (err) {
@@ -57,7 +57,7 @@ const LogIn = () => {
 
         <form className="flex flex-col gap-4 text-center" onSubmit={handleSubmit}>
           <input
-            type="username"
+            type="text"
             name="username"
             value={credentials.username}
             onChange={handleChange}

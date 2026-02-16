@@ -1,11 +1,10 @@
 export const getCurrentUser = () => {
-    const userData = localStorage.getItem('username')
+    const userData = localStorage.getItem('user')
     if (!userData) return null
 
     try {
         return JSON.parse(userData)
     } catch (error) {
-        console.error('Error parsing user data from localStorage:', error)
         return null
     }
 }

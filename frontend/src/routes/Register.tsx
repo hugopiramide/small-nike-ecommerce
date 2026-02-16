@@ -6,11 +6,6 @@ import { type UserRequest, type LoginRequest } from '../types/types'
 const Register = () => {
   const navigate = useNavigate()
 
-  const [credentials, setCredentials] = useState<LoginRequest>({
-    username: '',
-    password: '',
-  })
-
   const [formData, setFormData] = useState<UserRequest>({
     username: '',
     name: '',
@@ -66,14 +61,14 @@ const Register = () => {
       }
       const newUser = await authService.register(submissionData)
 
-      setCredentials({
+      const loginCredentials: LoginRequest = {
         username: formData.username,
         password: formData.password
-      })
+      }
 
-      const user = await authService.login(credentials)
+      const user = await authService.login(loginCredentials)
 
-      localStorage.setItem('username', JSON.stringify(user))
+      localStorage.setItem('user', JSON.stringify(user))
 
       navigate('/home', { state: { message: '¡Bienvenido, ' + newUser.username + '!' } })
     } catch (err) {

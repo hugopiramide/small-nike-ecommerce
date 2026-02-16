@@ -1,13 +1,13 @@
-import { type LoginRequest, type UserRequest, type UserResponse } from '../types/types' 
+import { type LoginRequest, type UserRequest, type UserResponse } from '../types/types'
 
 const API_URL = 'http://localhost:8080/api/users'
 
 export const authService = {
 
-    register: async (userData: UserRequest): Promise<UserResponse> => {
-        const response = await fetch(`${API_URL}`, {
-        method: 'POST',
-        headers: {
+  register: async (userData: UserRequest): Promise<UserResponse> => {
+    const response = await fetch(`${API_URL}`, {
+      method: 'POST',
+      headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),

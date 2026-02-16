@@ -15,7 +15,6 @@ export const useShoppingCart = (userId: number) => {
       setCart(data)
     } catch (err) {
       setError("Error al cargar el carrito")
-      console.error(err)
     } finally {
       setLoading(false)
     }
@@ -41,7 +40,6 @@ export const useShoppingCart = (userId: number) => {
       } catch (err) {
         const errorMessage = "No se pudo añadir el producto al carrito"
         setError(errorMessage)
-        console.error(err)
         throw err
       }
     },
@@ -64,7 +62,6 @@ export const useShoppingCart = (userId: number) => {
       } catch (err) {
         const errorMessage = "Error al eliminar el producto del carrito"
         setError(errorMessage)
-        console.error(err)
         throw err
       }
     },
@@ -79,7 +76,6 @@ export const useShoppingCart = (userId: number) => {
     } catch (err) {
       const errorMessage = "Error al vaciar el carrito"
       setError(errorMessage)
-      console.error(err)
       throw err
     }
   }, [fetchCart])

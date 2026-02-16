@@ -7,7 +7,7 @@ const formatPrice = (amount: number) => {
 }
 
 export const ShoppingCart: React.FC = () => {
-  const userData = localStorage.getItem('username')
+  const userData = localStorage.getItem('user')
   const user = userData ? JSON.parse(userData) : null
   const userId = user?.id || 1
   const { cart, loading, removeItem, addToCart } = useShoppingCart(userId)

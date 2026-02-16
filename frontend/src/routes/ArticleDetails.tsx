@@ -91,7 +91,7 @@ const ArticleDetails = () => {
                     return
                   }
                   try {
-                    const userData = localStorage.getItem('username')
+                    const userData = localStorage.getItem('user')
                     const user = userData ? JSON.parse(userData) : null
                     const userId = user?.id || 1
 
@@ -103,7 +103,6 @@ const ArticleDetails = () => {
 
                     alert('Producto añadido al carrito')
                   } catch (err) {
-                    console.error(err)
                     alert('Error al añadir el producto al carrito')
                   }
                 }} method="post">

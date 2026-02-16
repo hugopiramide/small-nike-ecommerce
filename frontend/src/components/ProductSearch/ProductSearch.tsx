@@ -5,10 +5,10 @@ import type { ProductResponse } from '../../types/types'
 
 const ProductSearch = () => {
   const [query, setQuery] = useState<string>("")
-  const [results, setResults] = useState<ProductResponse[]>([]) 
+  const [results, setResults] = useState<ProductResponse[]>([])
   const [itsOpen, setItsOpen] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
-  
+
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleSearch = async (e?: FormEvent) => {
@@ -24,7 +24,6 @@ const ProductSearch = () => {
         setItsOpen(true)
       }
     } catch (error) {
-      console.error("Error buscando productos:", error)
     } finally {
       setLoading(false)
     }
@@ -54,7 +53,7 @@ const ProductSearch = () => {
           <span className="position-absolute top-50 start-0 translate-middle-y ps-3">
             <Search className={loading ? "text-primary spinner-border-sm" : "text-muted"} size={18} />
           </span>
-          
+
           <input
             type="text"
             className="form-control border-0 bg-light rounded-pill ps-5 py-2"
@@ -70,20 +69,20 @@ const ProductSearch = () => {
               onClick={handleClear}
               className="btn btn-link position-absolute end-0 top-50 translate-middle-y pe-3 text-muted border-0 shadow-none"
             >
-              <XCircleFill size={16}/>
+              <XCircleFill size={16} />
             </button>
           )}
         </div>
       </form>
 
-      { itsOpen && (query.length > 0) && (
+      {itsOpen && (query.length > 0) && (
         <ul className="list-group position-absolute w-100 shadow-lg mt-2" style={{ zIndex: 1050, maxHeight: '300px', overflowY: 'auto' }}>
           {results.length > 0 ? (
             results.map((product) => (
               <Link
                 key={product.id}
                 onClick={() => setItsOpen(false)}
-                to={`/articles/${product.id}`} 
+                to={`/articles/${product.id}`}
                 className='text-decoration-none'
               >
                 <li className="list-group-item list-group-item-action d-flex justify-content-between align-items-center">

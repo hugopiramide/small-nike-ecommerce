@@ -31,12 +31,6 @@ export interface ProductVariantResponse {
   priceModifier: number;
 }
 
-export interface UserRequest {
-  username: string;
-  email: string;
-  password: string;
-  profileImgUrl: string;
-}
 
 export interface LoginRequest {
   username: string;
