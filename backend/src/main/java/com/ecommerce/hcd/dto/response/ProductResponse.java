@@ -2,7 +2,9 @@ package com.ecommerce.hcd.dto.response;
 
 import java.util.List;
 
-public class ProductResponse {
+import org.springframework.hateoas.RepresentationModel;
+
+public class ProductResponse extends RepresentationModel<ProductResponse> {
 
     private Long id;
     private CategoryResponse category;
