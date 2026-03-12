@@ -142,7 +142,7 @@ const Register = () => {
           <input
             type="date"
             name="birthday"
-            value={formData.birthday}
+            value={formData.birthday as string}
             onChange={handleChange}
             placeholder="Fecha de Nacimiento"
             className="w-full border border-gray-300 p-3 rounded-sm focus:border-black outline-none transition-all"

@@ -1,18 +1,18 @@
 import { Link, useLoaderData, useLocation, useNavigate, type LoaderFunction } from "react-router-dom"
 import AuthModal from "../components/ModalAuth"
 import { useEffect, useState } from "react"
-import type { ProductResponse } from "../types/types"
+import type { Page, ProductResponse } from "../types/types"
 import CardList from "../components/CardList"
 
 const loader: LoaderFunction = async () => {
-    const response = await fetch('http://localhost:8080/api/products/find-first-10')
+    const response = await fetch('http://localhost:8080/api/products')
     const firstProducts = await response.json()
     return firstProducts
 }
 
 const Home = () => {
-
-    const firstProducts = useLoaderData() as ProductResponse[]
+    const productsPage = useLoaderData() as Page<ProductResponse>
+    const firstProducts = productsPage?._embedded?.productResponseList || []
 
     const location = useLocation()
     const navigate = useNavigate()

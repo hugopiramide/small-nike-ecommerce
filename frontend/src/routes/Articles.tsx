@@ -14,7 +14,11 @@ const Articles = () => {
   const productsPage = useLoaderData() as Page<ProductResponse>
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const { content, first, last, number: currentPage, totalPages } = productsPage
+  const { _embedded, page: pageData } = productsPage
+  const content = _embedded?.productResponseList || []
+  const { number: currentPage, totalPages } = pageData
+  const first = currentPage === 0
+  const last = currentPage >= totalPages - 1
 
   const handlePageChange = (newPage: number) => {
     if (newPage < 0 || newPage >= totalPages) return

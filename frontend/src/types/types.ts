@@ -47,7 +47,7 @@ export interface CartResponse {
   id: number;
   user: UserResponse;
   cartItems: CartItemResponse[];
-  updatedAt: string;
+  updateAt: string;
 }
 
 export interface CartRequest {
@@ -69,7 +69,7 @@ export interface UserResponse {
   email: string;
   profileImgUrl: string;
   role: string;
-  createdAt: string;
+  createAt: string;
 }
 
 export interface UserRequest {
@@ -83,12 +83,19 @@ export interface UserRequest {
 }
 
 export interface Page<T> {
-  content: T[];
-  totalPages: number;
-  totalElements: number;
-  size: number;
-  number: number;
-  first: boolean;
-  last: boolean;
-  empty: boolean;
+  _embedded: {
+    productResponseList: T[];
+  };
+  _links: {
+    first?: { href: string };
+    self?: { href: string };
+    next?: { href: string };
+    last?: { href: string };
+  };
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: number;
+  };
 }

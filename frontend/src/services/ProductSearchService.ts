@@ -1,6 +1,6 @@
 import type { ProductResponse } from "../types/types"
 
-const API_URL = "http://localhost:8080/api/products/search"
+const API_URL = "http://localhost:8080/api/products"
 
 
 async function handleResponse<T>(response: Response): Promise<T> {

@@ -15,8 +15,9 @@ export const ShoppingCart: React.FC = () => {
   const calculateTotal = () => {
     if (!cart?.cartItems) return 0
     return cart.cartItems.reduce((total, item) => {
-      const price = item.productVariantId.product?.price || 0
-      return total + (price * item.quantity)
+      const productPrice = item.productVariantId?.product?.price || 0
+      const priceModifier = item.productVariantId?.priceModifier || 0
+      return total + ((productPrice + priceModifier) * item.quantity)
     }, 0)
   }
 
@@ -132,7 +133,7 @@ export const ShoppingCart: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      <p className="fw-bold">{formatPrice(product.price)}</p>
+                      <p className="fw-bold">{formatPrice((product.price || 0) + (group.items[0]?.productVariantId?.priceModifier || 0))}</p>
                     </div>
 
                     <div className="mt-auto">

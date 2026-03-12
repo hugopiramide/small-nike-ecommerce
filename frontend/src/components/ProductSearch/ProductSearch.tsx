@@ -17,10 +17,11 @@ const ProductSearch = () => {
 
     setLoading(true)
     try {
-      const response = await fetch(`http://localhost:8080/api/products/search?name=${query}`)
+      const response = await fetch(`http://localhost:8080/api/products?name=${query}`)
       if (response.ok) {
-        const data: ProductResponse[] = await response.json()
-        setResults(data)
+        const data = await response.json()
+        const items = data || []
+        setResults(items)
         setItsOpen(true)
       }
     } catch (error) {
